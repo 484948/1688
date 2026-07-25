@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>آلية العمل والتحديات في التجارة والشحن</title>
+    <!-- استدعاء خط "Tajawal" العصري من Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            color: #f8fafc;
+            padding: 40px 16px;
+            min-height: 100vh;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        /* الحاوية الرئيسية للتمرير */
+        .main-container {
+            max-width: 750px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .section {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        /* العناوين الرئيسية للأقسام */
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            text-align: center;
+            background: linear-gradient(90deg, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 4px 20px rgba(56, 189, 248, 0.2);
+            line-height: 1.3;
+        }
+
+        /* عنوان قسم العيوب باللون التحذيري */
+        .section-title.danger {
+            background: linear-gradient(90deg, #f87171, #fb923c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 4px 20px rgba(248, 113, 113, 0.2);
+        }
+
+        /* الإطارات الزجاجية */
+        .card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        /* --- القسم الأول: سلسلة التوريد --- */
+        .line-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+        }
+
+        .title-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .dash {
+            color: #38bdf8;
+            font-size: 1.4rem;
+        }
+
+        .emoji-group {
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+        }
+
+        /* --- قائمة الخدمات والعيوب --- */
+        .card-header {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #38bdf8;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 12px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            line-height: 1.4;
+        }
+
+        .card-header.danger-header {
+            color: #f87171;
+        }
+
+        .items-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .list-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 16px 18px;
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+        }
+
+        .item-icon {
+            font-size: 1.5rem;
+            line-height: 1;
+            padding-top: 2px;
+        }
+
+        .item-content h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #f1f5f9;
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+
+        .item-content p {
+            font-size: 1rem;
+            color: #94a3b8;
+            line-height: 1.7;
+        }
+
+        /* تنسيق الشقين داخل النقطة الأخيرة */
+        .dual-split-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-top: 12px;
+            width: 100%;
+        }
+
+        .split-box {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(248, 113, 113, 0.2);
+            border-radius: 10px;
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .split-box h4 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #fca5a5;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            line-height: 1.4;
+        }
+
+        .split-box p {
+            font-size: 0.95rem;
+            color: #94a3b8;
+            line-height: 1.6;
+        }
+
+        /* صندوق الملاحظة التنبيهية */
+        .alert-box {
+            background: rgba(248, 113, 113, 0.1);
+            border: 1px solid rgba(248, 113, 113, 0.25);
+            border-radius: 12px;
+            padding: 16px;
+            color: #fca5a5;
+            font-size: 1rem;
+            line-height: 1.6;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-top: 6px;
+        }
+
+        /* قسم الأسئلة والتأكد والحل (1688) */
+        .solution-card {
+            border-color: rgba(56, 189, 248, 0.2);
+        }
+
+        .question-box {
+            background: rgba(255, 255, 255, 0.03);
+            border-right: 4px solid #38bdf8;
+            border-radius: 8px;
+            padding: 14px 16px;
+            margin-bottom: 12px;
+            font-size: 1.05rem;
+            color: #cbd5e1;
+            line-height: 1.7;
+        }
+
+        .answer-highlight {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #38bdf8;
+            margin: 12px 0;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .solution-text {
+            font-size: 1.05rem;
+            color: #94a3b8;
+            line-height: 1.8;
+        }
+
+        /* الشبكة التعريفية بالمنصة */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(56, 189, 248, 0.15);
+            border-radius: 14px;
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .info-card-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #38bdf8;
+            font-weight: 700;
+            font-size: 1.1rem;
+            line-height: 1.4;
+        }
+
+        .info-card p {
+            font-size: 0.98rem;
+            color: #94a3b8;
+            line-height: 1.6;
+        }
+
+        /* النص المصحح المخصص للموبايل */
+        .corrected-text-box {
+            background: rgba(56, 189, 248, 0.06);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 16px;
+            padding: 22px 18px;
+            margin-top: 20px;
+            font-size: 1.15rem; /* حجم خط ممتاز ومريح للعين على الهاتف */
+            line-height: 1.95;  /* مسافة مريحة بين الأسطر لسهولة التصفح */
+            color: #f1f5f9;
+        }
+
+        /* =================================================== */
+        /* تعديلات الموبايل والشاشات الصغيرة (Responsive Design) */
+        /* =================================================== */
+        @media (max-width: 600px) {
+            body {
+                padding: 20px 10px;
+            }
+
+            .card {
+                padding: 16px;
+                border-radius: 16px;
+            }
+
+            .section-title {
+                font-size: 1.45rem;
+            }
+
+            .card-header {
+                font-size: 1.15rem;
+            }
+
+            /* تكبير أحجام الخط للفقرات والنصوص لسهولة القراءة دون زوم */
+            .corrected-text-box {
+                font-size: 1.1rem;
+                line-height: 1.9;
+                padding: 16px;
+            }
+
+            .solution-text, .question-box, .item-content p {
+                font-size: 1rem;
+                line-height: 1.75;
+            }
+
+            .dual-split-container {
+                grid-template-columns: 1fr; /* جعل الشقين تحت بعض في الموبايل */
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .line-item {
+                flex-direction: row;
+                justify-content: space-between;
+                padding: 12px 16px;
+            }
+
+            .title-group {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+
+        <!-- القسم الأول: طريقة عمل التجارة -->
+        <section class="section">
+            <h1 class="section-title">طريقة عمل التجارة بشكل مبسط</h1>
+            <div class="card">
+                <div class="line-item">
+                    <div class="title-group">
+                        <span>مكتب الصين</span>
+                        <span class="dash">—</span>
+                    </div>
+                    <div class="emoji-group">🏭</div>
+                </div>
+
+                <div class="line-item">
+                    <div class="title-group">
+                        <span>تاجر الجملة</span>
+                        <span class="dash">—</span>
+                    </div>
+                    <div class="emoji-group">📦📦📦</div>
+                </div>
+
+                <div class="line-item">
+                    <div class="title-group">
+                        <span>تاجر التجزئة</span>
+                        <span class="dash">—</span>
+                    </div>
+                    <div class="emoji-group">📦</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- القسم الثاني: مكتب الشحن وطريقة عمله -->
+        <section class="section">
+            <h2 class="section-title">مكتب الشحن وطريقة عمله</h2>
+            <div class="card">
+                <div class="card-header">
+                    <span>🚢</span>
+                    <span>كيف يلبي مكتب الشحن طلبات تاجر الجملة؟</span>
+                </div>
+
+                <ul class="items-list">
+                    <li class="list-item">
+                        <span class="item-icon">🔍</span>
+                        <div class="item-content">
+                            <h3>1. التفتيش والبحث الميداني</h3>
+                            <p>النزول المباشر للأسواق والمصانع للبحث عن أفضل البضائع، فحص جودتها، والتفاوض على أفضل الأسعار.</p>
+                        </div>
+                    </li>
+
+                    <li class="list-item">
+                        <span class="item-icon">🏛️</span>
+                        <div class="item-content">
+                            <h3>2. عرض المنتجات الجاهزة</h3>
+                            <p>تقديم كتالوجات ومنتجات معروضة مسبقاً لدى المكتب تم الاتفاق عليها مع المصانع لتسهيل الاختيار.</p>
+                        </div>
+                    </li>
+
+                    <li class="list-item">
+                        <span class="item-icon">🛒</span>
+                        <div class="item-content">
+                            <h3>3. خدمة الشراء لحساب العملاء (اشترِ لي)</h3>
+                            <p>شراء منتجات الموردين بناءً على روابط أو صور أو مواصفات خاصة يزود بها تاجر الجملة المكتب.</p>
+                        </div>
+                    </li>
+
+                    <li class="list-item">
+                        <span class="item-icon">📦</span>
+                        <div class="item-content">
+                            <h3>4. التجميع والتأمين اللوجستي</h3>
+                            <p>استلام البضائع من عدة مصانع، فحصها، تجميعها في شحنة واحدة، وإنهاء إجراءات الشحن والتخليص.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- القسم الثالث: عيوب مكتب الشحن والعمولات المخفية -->
+        <section class="section">
+            <h2 class="section-title danger">عيوب ومخاطر التعامل مع كل مكاتب الشحن</h2>
+            <div class="card danger-card">
+                <div class="card-header danger-header">
+                    <span>⚠️</span>
+                    <span>خدعة العمولة المعلنة والنسب المخفية</span>
+                </div>
+
+                <ul class="items-list">
+                    <li class="list-item">
+                        <span class="item-icon">📄</span>
+                        <div class="item-content">
+                            <h3>1. الاتفاق الظاهري (عمولة 3%)</h3>
+                            <p>يتم الاتفاق معك ظاهرياً على نسبة عمولة منخفضة ومغرية (مثل 3%) مقابل تجميع الشحنات ومتابعتها، ولكن الواقع غالبًا ما يكون مختلفًا تمامًا.</p>
+                        </div>
+                    </li>
+
+                    <li class="list-item">
+                        <span class="item-icon">💸</span>
+                        <div class="item-content">
+                            <h3>2. تحالف المصنع مع الوسيط (15% إلى 20%)</h3>
+                            <p>المصنع متفق مسبقاً مع المكتب أو المترجم على إعطائه عمولة مخفية تصل إلى 15% - 20%؛ لأن الوسيط يجلب للمصنع أعداداً كبيرة من التجار مثلك، ولن يخسر المصنع علاقته وشغله المستمر مع الوسيط لمجرد إرضاء زبون واحد.</p>
+                        </div>
+                    </li>
+
+                    <li class="list-item">
+                        <span class="item-icon">🤝</span>
+                        <div class="item-content">
+                            <h3>3. التمييز في البضائع وطرق الدفع (الدين والكاش)</h3>
+                            <p>عند تعريفك بموردين، يتم رفع الأسعار عليك لحساب عمولات جلب الزبائن للمصنع؛ سواء كان ذلك في **الإكسسوارات والتوكات عند الشراء بالأجل (الدين)**، أو في **الإلكترونيات حتى عند الشراء الفوري (كاش)**.</p>
+                        </div>
+                    </li>
+
+                    <li class="list-item">
+                        <span class="item-icon">🔗</span>
+                        <div class="item-content">
+                            <h3>4. قوة نفوذ المترجم والوسيط في الصين</h3>
+                            <p>حتى لو سافرت بنفسك للصين وتفاوضت مباشرة، فإن المصنع سيظل متفقاً مع المترجم أو المكتب ويُعطيه نسبته؛ لأن المصنع يعرف أن المترجم يجلب له تدفقاً دائماً من التجار، وبالتالي يفضل المصنع حماية علاقته مع الوسيط على إعطائك السعر المباشر والواقعي.</p>
+                        </div>
+                    </li>
+
+                    <li class="list-item">
+                        <span class="item-icon">💎</span>
+                        <div class="item-content" style="width: 100%;">
+                            <h3>5. انعكاسات التعامل مع المصانع (الكميات وتأثيرها المالي)</h3>
+                            <p style="margin-bottom: 10px;">من عيوب مكتب الشحن التي قد لا تؤثر عليك لو تأتي بكميات كبيرة، لكنها تؤثر وتضر بشكل مباشر لو تأتي بكميات صغيرة. تعاقد المكتب مع المصانع للتصنيع يظهر تأثيره في جانبين رئيسيين:</p>
+                            
+                            <div class="dual-split-container">
+                                <div class="split-box">
+                                    <h4>⏳ الشق الأول: عامل الوقت والانتظار</h4>
+                                    <p>لمن يشتري بكميات صغيرة، قد تؤثر عليه هذه النقطة بشكل سلبي في عامل الوقت، حيث يجعلك تنتظر طويلاً حتى تتم جدولة طلبيتك مع الكميات الأخرى. وذلك بسبب أنهم حتى لو دفعت أنت كاش، فإنهم يدفعون للمصنع بالأجل.</p>
+                                </div>
+                                <div class="split-box">
+                                    <h4>💰 الشق الثاني: الربح الصافي (دون دفع فلس واحد)</h4>
+                                    <p>يجعلونك تدفع تكاليف الشحن الداخلي، مصاريف المخزن، وغيرها من الأمور؛ بينما يعتمدون على عربون صغير للمصنع والباقي بالأجل، ليحققوا مكسباً صافياً يصل إلى 20% دون أن يدفعوا فلسًا واحدًا من جيبهم.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="list-item">
+                        <span class="item-icon">🚢</span>
+                        <div class="item-content">
+                            <h3>6. هامش الربح الإضافي من أسعار الحاويات</h3>
+                            <p>حتى أن هناك بعض المكاتب التي تكسب أيضاً من سعر الحاوية نفسها؛ حيث يحصلون عليها بسعر رخيص جداً من شركات الملاحة بحكم تعاملاتهم، ثم يضيفون نسبة ربح إضافية عليها لصالحهم دون أن تكون نسبة كبيرة تثير الشكوك.</p>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="alert-box">
+                    <span style="font-size: 1.3rem;">💡</span>
+                    <div>
+                        <strong>ملاحظة هامة:</strong> مهما كان حجم بضاعتك، يستحيل أن يأخذوا نسبة 3% فقط؛ ولدينا دليل على ذلك وسنطرحه لاحقاً...
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- القسم الرابع: التساؤلات والحل (منصة 1688) -->
+        <section class="section">
+            <h2 class="section-title">كيف تتأكد وما هو الحل المباشر؟</h2>
+            <div class="card solution-card">
+                
+                <div class="question-box">
+                    <strong>قد يسأل البعض:</strong> "كلامك خاطئ، كيف نتأكد من كل هذا الكلام؟" <br>
+                    <strong>أو قد يقول البعض:</strong> "كلامك صحيح، ولكن ما الحل؟ هم الذين يعرفون المصانع والمنتجات الجديدة!"
+                </div>
+
+                <div class="answer-highlight">الإجابة: 1688</div>
+
+                <div class="solution-text">
+                    <p>ما هو هذا الرقم؟ يشير هذا الرقم إلى **منصة صينية داخلية فقط**، موجهة لكل من يعمل أو يعيش داخل الصين. هذه المنصة هي عبارة عن **السوق الصيني الحقيقي** الذي يجمع كافة التجار والمصانع المباشرة.</p>
+                    <br>
+                    <p>في هذه المنصة، تجد تجاراً يمتلكون كميات ضخمة جداً يشترونها مباشرة من المصانع (مثل 100,000 قطعة أو أكثر) بأسعار مخفضة للغاية، ويعيدون بيعها لمن يطلب بالجملة بنفس السعر الذي تتلقاه من المصنع مباشرة أو حتى أفضل.</p>
+                    <br>
+                    <p><strong>مثال توضيحي:</strong> لو ذهب تاجر كبير للمصنع وطلب 100,000 قطعة، سيحصل عليها بسعر منخفض جداً. أما لو ذهب شخص آخر للمصنع وطلب 2,000 قطعة فقط، فسيحصل عليها بسعر أغلَى قليلاً لأن كميته صغيرة. هنا تكمن الفائدة: يمكنك الشراء من التاجر الذي يتوفر لديه مخزون ضخم على المنصة، لأنه سيعطيك المنتجات بسعر يعادل سعر المصنع، وفي بعض الحالات بأسعار أفضل وأسهل لك بكثير.</p>
+                    <br>
+                    <p><strong>نفس المبدأ لدى المكاتب:</strong> المكاتب تقدم لك نفس الأمر من خصومات للكميات الكبيرة، مع العلم أننا اتفقنا أنهم يأخذون عمولتهم ونسبهم المخفية، لكن المنصة تمنحك هذه الشفافية والخصم بشكل مباشر ودون وسيط.</p>
+                </div>
+
+                <!-- أدوات ومميزات الاستيراد الفعلية للمستورد على المنصة -->
+                <div style="margin-top: 15px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px;">
+                    <h3 style="color: #38bdf8; font-size: 1.1rem; margin-bottom: 12px;">🛠️ أدوات ومميزات الاستيراد العملية على المنصة:</h3>
+                    
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <div class="info-card-header">
+                                <span>🚀</span>
+                                <span>اكتشاف المنتجات قبل ظهورها في السوق المحلي</span>
+                            </div>
+                            <p>تضم المنصة آلاف بل ملايين المنتجات في مختلف المجالات والقطاعات. تتيح لك اكتشاف الابتكارات والمنتجات الحديثة جداً ومتابعة الموديلات الجديدة فور نزولها من المصنع وقبل أن تصل أو تظهر في سوقك المحلي بشهور.</p>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="info-card-header">
+                                <span>🏷️</span>
+                                <span>خصومات الشراء المباشر والكميات</span>
+                            </div>
+                            <p>توفر المنصة نظام تخفيضات شرائح الكميات (Tiered Pricing)، بالإضافة إلى كوبونات الخصم المباشرة، والعروض الموسمية التي تمنحك أسعاراً أرقص بكتير من الشراء التقليدي.</p>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="info-card-header">
+                                <span>📸</span>
+                                <span>البحث بالتصفح والصور</span>
+                            </div>
+                            <p>يمكنك تصفح السوق والبحث عن أي منتج بمجرد رفع صورته، للوصول الفوري إلى مصنعه الأصلي أو الموزع المباشر ومعرفة سعره الحقيقي.</p>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="info-card-header">
+                                <span>📞</span>
+                                <span>التواصل المباشر والأرقام</span>
+                            </div>
+                            <p>تتيح لك المنصة التحدث المباشر مع الموردين ومعرفة أرقام تفاصيل التواصل الفردية للمصانع والتجار للتفاوض المباشر معهم.</p>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="info-card-header">
+                                <span>⚙️</span>
+                                <span>تنوع القطاعات والماكينات</span>
+                            </div>
+                            <p>تغطية شاملة لكل الأقسام؛ بدءاً من <strong>ماكينات التصنيع الخفيفة والثقيلة</strong>، مروراً بـ <strong>إكسسوارات الهواتف والكترونيات الذكاء الاصطناعي</strong>، وصولاً إلى <strong>مستلزمات التعبئة والتغليف، الأدوات المنزلية الذكية، والملابس وخطوط الإنتاج</strong>.</p>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="info-card-header">
+                                <span>🔍</span>
+                                <span>التحقق من هوية المصنع</span>
+                            </div>
+                            <p>يمكنك التثبت مما إذا كان البائع مصنعاً حقيقياً (Real Factory) أم مجرد تاجر تجزئة، عبر رؤية ترخيص الشركة الحقيقي، مساحة المصنع، وعدد العمال.</p>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="info-card-header">
+                                <span>🛡️</span>
+                                <span>حماية المشتري وضمان الحقوق</span>
+                            </div>
+                            <p>نظام حماية مالي متكامل لا يسلم الأموال للبائع إلا بعد استلام الشحنة وتأكيد مطابقتها للمواصفات، مع إمكانية تقديم شكاوى واسترجاع الأموال عند أية مخالفة.</p>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="info-card-header">
+                                <span>📊</span>
+                                <span>تقييم وتاريخ البائع</span>
+                            </div>
+                            <p>تعرض المنصة بيانات شاملة تشمل حجم المبيعات، نسبة إعادة الشراء (Repeat Rate)، وسرعة الشحن لتضمن التعامل مع أفضل التجار.</p>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="info-card-header">
+                                <span>🎨</span>
+                                <span>التصنيع والتعديل الخاص (OEM)</span>
+                            </div>
+                            <p>إمكانية طلب العينات (Samples) والتعديل على المنتجات وإضافة علامتك التجارية وشعارك الخاص مباشرة من المصانع المسجلة.</p>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="info-card-header">
+                                <span>🛒</span>
+                                <span>خطوات وقسم آلية الشراء</span>
+                            </div>
+                            <p>قسم مخصص يشرح لك كيف تشتري وتدخل لترى كافة تفاصيل الطلب، تحديد الكميات والشحنات، ومتابعة حالة التجميع والشحن خطوة بخطوة.</p>
+                        </div>
+                    </div>
+
+                    <!-- الصندوق المخصص والمحسّن للهواتف الذكية -->
+                    <div class="corrected-text-box">
+                        إذا كنت بائع تجزئة أو صاحب محل أو تاجر تتعامل بالكاش ستوفر الكثير جداً، أما إن كنت تتعامل بالدين فليس له قيمة كبيرة بالنسبة لك لأنه يتعامل بالكاش والشراء سريع؛ فهو مثل السوق الحقيقي. <br><br>
+                        والمنصة لأنها في الصين توفر لك كل البيانات عن التاجر: التعليقات الموجودة على المنتج الذي تم شراؤه، صور من العملاء، تقييم المتجر، نسبة التزامه بالوقت، الكميات التي تم إرجاعها له، والكثير من الأشياء التي تفيدك حقيقةً، وحتى لو لم تعرفها فلا يعني أنها غير موجودة. <br><br>
+                        قد تقول: "كيف أضمن ألا يرسل لي التاجر منتجاً غير المطلوب؟" لها رد. "كيف أضمن أنه يرسل لي البضاعة؟" لها رد. "كيف أضمن أن السعر صحيح؟" لها رد. المنصة ممتازة حيث تقوم عليها أسواق بـ المليارات بل مئات المليارات.
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+</body>
+</html>
